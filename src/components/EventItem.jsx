@@ -1,0 +1,46 @@
+import React from 'react'
+import { models } from '../assets/assets';
+import { products } from '../assets/assets';
+
+const EventItem = ({id, name, image,date, location, participating_models, products_showcased}) => {
+   
+    const getModelNames = () => {
+        return participating_models.map(id => {
+          const model = models.find(model => model._id === id);
+                    return model ? model.name : "Model not found";
+        });
+      };
+    
+      const modelNames = getModelNames();
+
+      const getProductNames = () => {
+        return products_showcased.map(id => {
+          const product = products.find(product => product._id === id);
+                    return product ? product.name : "Model not found";
+        });
+      };
+    
+      const productNames = getProductNames();
+
+
+  return (
+    
+
+    <div className='text-gray-700'>
+        <div className=' overflow-hidden'>
+            <img className='hover:scale-110 transition ease-in-out w-48 h-48 object-cover overflow-hidden' src={image} alt=""/>
+        </div>
+        <p className='pt-3 pb-1 text-lg font-bold'>{name}</p>
+        <p className='pt-3 pb-1 text-sm'><span className='font-bold'>Location:</span> {location}</p>
+        <p className='text-sm pb-1'><span className='font-bold'>Date:</span> {date}</p>
+        <p className='text-sm pb-1'><span className='font-bold'>Models participating:</span> {modelNames.map((name, index) => (
+          <li key={index} className='text-sm'>{name}</li>
+        ))}</p>
+        <p className='text-sm '><span className='font-bold'>Products showcased:</span> {productNames.map((name, index) => (
+          <li key={index} className='text-sm'>{name}</li>
+        ))}</p>
+    </div>
+  )
+}
+
+export default EventItem
